@@ -9,55 +9,70 @@ function getComputerChoice() {
             return "scissors";
     }
 }
-
 function getHumanChoice() {
     let userChoice = prompt("Rock, Paper or Scissors?", getComputerChoice());
     return userChoice.toLowerCase();
 }
+function playGame(rounds) {
+    function playRound(humanChoice, computerChoice) {
+        console.log(`You chose ${humanChoice} and Computer chose ${computerChoice}`)
 
-
-let humanScore = 0;
-let computerScore = 0;
-
-let humanChoice = getHumanChoice();
-let computerChoice = getComputerChoice();
-
-function playRound(humanChoice, computerChoice) {
-    console.log(`You chose ${humanChoice} and Computer chose ${computerChoice}`)
-
-    if ((humanChoice === "rock") && (computerChoice === "rock")) {
-        console.log("Draw!");
+        if ((humanChoice === "rock") && (computerChoice === "rock")) {
+            console.log("Draw!");
+        }
+        else if ((humanChoice === "rock") && (computerChoice === "paper")) {
+            console.log("You Lose! Paper beats Rock");
+            computerScore++
+        }
+        else if ((humanChoice === "rock") && (computerChoice === "scissors")) {
+            console.log("You Won! Rock beats Scissors");
+            humanScore++
+        }
+        else if ((humanChoice === "paper") && (computerChoice === "rock")) {
+            console.log("You Won! Paper beats Rock");
+            humanScore++
+        }
+        else if ((humanChoice === "paper") && (computerChoice === "paper")) {
+            console.log("Draw!");
+        }
+        else if ((humanChoice === "paper") && (computerChoice === "scissors")) {
+            console.log("You Lose! Scissors beats Paper");
+            computerScore++
+        }
+        else if ((humanChoice === "scissors") && (computerChoice === "rock")) {
+            console.log("You Lose! Scissors beats Rock");
+            computerScore++
+        }
+        else if ((humanChoice === "scissors") && (computerChoice === "paper")) {
+            console.log("You Won! Scissors beats Paper");
+            humanScore++
+        }
+        else if ((humanChoice === "scissors") && (computerChoice === "scissors")) {
+            console.log("Draw!");
+        }
     }
-    else if ((humanChoice === "rock") && (computerChoice === "paper")) {
-        console.log("You Lose! Paper beats Rock");
-        computerScore++
+    let humanScore = 0;
+    let computerScore = 0;
+    let counter = 1;
+    while (counter <= rounds) {
+        playRound(getHumanChoice(), getComputerChoice());
+        counter++;
     }
-    else if ((humanChoice === "rock") && (computerChoice === "scissors")) {
-        console.log("You Won! Rock beats Scissors");
-        humanScore++
+    if (humanScore > computerScore) {
+        console.log(`You Won!   User Score: ${humanScore}   Computer Score: ${computerScore}`);
+        humanScore = 0;
+        computerScore = 0;
     }
-    else if ((humanChoice === "paper") && (computerChoice === "rock")) {
-        console.log("You Won! Paper beats Rock");
-        humanScore++
+    else if (humanScore < computerScore) {
+        console.log(`You Lost!   User Score: ${humanScore}   Computer Score: ${computerScore}`);
+        humanScore = 0;
+        computerScore = 0;
     }
-    else if ((humanChoice === "paper") && (computerChoice === "paper")) {
-        console.log("Draw!");
-    }
-    else if ((humanChoice === "paper") && (computerChoice === "scissors")) {
-        console.log("You Lose! Scissors beats Paper");
-        computerScore++
-    }
-    else if ((humanChoice === "scissors") && (computerChoice === "rock")) {
-        console.log("You Lose! Scissors beats Rock");
-        computerScore++
-    }
-    else if ((humanChoice === "scissors") && (computerChoice === "paper")) {
-        console.log("You Won! Scissors beats Paper");
-        humanScore++
-    }
-    else if ((humanChoice === "scissors") && (computerChoice === "scissors")) {
-        console.log("Draw!");
+    else {
+        console.log("Meow");
+        humanScore = 0;
+        computerScore = 0;
     }
 }
 
-playRound(humanChoice, computerChoice);
+playGame(5);    
